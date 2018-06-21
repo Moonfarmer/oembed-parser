@@ -1,6 +1,10 @@
 // utils -> fetchEmbed
 
-const fetch = require('node-fetch');
+// Don't require node-fetch if running in the browser
+// Require it if running in Node
+if (typeof fetch !== 'function') {
+  global.fetch = require('node-fetch');
+}
 
 const fetchEmbed = (url, provider, proxy) => {
   return new Promise((resolve, reject) => {
