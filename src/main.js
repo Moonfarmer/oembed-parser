@@ -1,12 +1,12 @@
 // main
 
-var {
+const {
   isValidURL,
   findProvider,
-  fetchEmbed
+  fetchEmbed,
 } = require('./utils');
 
-var extract = (url) => {
+const extract = (url, proxy) => {
   return new Promise((resolve, reject) => {
     if (!isValidURL(url)) {
       return reject(new Error('Invalid input URL'));
@@ -15,15 +15,15 @@ var extract = (url) => {
     if (!p) {
       return reject(new Error(`No provider found with given url "${url}"`));
     }
-    return resolve(fetchEmbed(url, p));
+    return resolve(fetchEmbed(url, p, proxy));
   });
 };
 
-var hasProvider = (url) => {
+const hasProvider = (url) => {
   return findProvider(url) !== null;
 };
 
 module.exports = {
   extract,
-  hasProvider
+  hasProvider,
 };

@@ -1,23 +1,30 @@
 // utils -> fetchEmbed
 
-var axios = require('axios');
+const fetch = require('node-fetch');
 
-var fetchEmbed = (url, provider) => {
+const fetchEmbed = (url, provider, proxy) => {
   return new Promise((resolve, reject) => {
     let {
-      provider_name,
-      provider_url,
-      url: resourceUrl
+      provider_name, // eslint-disable-line camelcase
+      provider_url, // eslint-disable-line camelcase
+      url: resourceUrl,
     } = provider;
 
-    let link = `${resourceUrl}?format=json&url=${encodeURIComponent(url)}`;
+    // Construct Oembed request url.  Accomodate for the 'oembed.json' and 'format=json' formats.
+    let baseLink = resourceUrl.match(`{format}`)
+      ? encodeURIComponent(`${resourceUrl.replace(`{format}`, `json`)}?url=${encodeURIComponent(url)}`)
+      : encodeURIComponent(`${resourceUrl}?format=json&url=${encodeURIComponent(url)}`);
 
-    return axios.get(link).then((res) => {
-      return res.data;
-    }).then((data) => {
-      data.provider_name = provider_name;
-      data.provider_url = provider_url;
-      return resolve(data);
+    let link = proxy
+      ? `${proxy}${baseLink}`
+      : baseLink;
+
+    return fetch(link).then((res) => {
+      return res.json();
+    }).then((json) => {
+      json.provider_name = provider_name; // eslint-disable-line camelcase
+      json.provider_url = provider_url; // eslint-disable-line camelcase
+      return resolve(json);
     }).catch((err) => {
       return reject(err);
     });
