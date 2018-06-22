@@ -3,7 +3,7 @@
  * @ndaidong
  **/
 
-var isValidURL = (str) => {
+export const isValidURL = (str) => {
   if (!str) {
     return false;
   }
@@ -17,5 +17,3 @@ var isValidURL = (str) => {
   }
   return true;
 };
-
-module.exports = isValidURL;

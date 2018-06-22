@@ -1,9 +1,6 @@
 // utils -> fetchEmbed
 
-// remove the node-fetch require so this works in the browser
-// fetch = require('node-fetch');
-
-const fetchEmbed = (url, provider, proxy) => {
+export const fetchEmbed = (url, provider, proxy) => {
   return new Promise((resolve, reject) => {
     let {
       provider_name, // eslint-disable-line camelcase
@@ -31,5 +28,3 @@ const fetchEmbed = (url, provider, proxy) => {
     });
   });
 };
-
-module.exports = fetchEmbed;

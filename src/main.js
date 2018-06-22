@@ -1,12 +1,8 @@
 // main
 
-const {
-  isValidURL,
-  findProvider,
-  fetchEmbed,
-} = require('./utils');
+import { isValidURL, findProvider, fetchEmbed } from './utils';
 
-const extract = (url, proxy) => {
+export const extract = (url, proxy) => {
   return new Promise((resolve, reject) => {
     if (!isValidURL(url)) {
       return reject(new Error('Invalid input URL'));
@@ -19,11 +15,6 @@ const extract = (url, proxy) => {
   });
 };
 
-const hasProvider = (url) => {
+export const hasProvider = (url) => {
   return findProvider(url) !== null;
-};
-
-module.exports = {
-  extract,
-  hasProvider,
 };

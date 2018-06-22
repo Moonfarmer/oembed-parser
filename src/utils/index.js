@@ -1,5 +1,4 @@
-module.exports = {
-  isValidURL: require('./isValidURL'),
-  findProvider: require('./findProvider'),
-  fetchEmbed: require('./fetchEmbed')
-};
+
+export { isValidURL } from './isValidURL';
+export { findProvider } from './findProvider';
+export { fetchEmbed } from './fetchEmbed';

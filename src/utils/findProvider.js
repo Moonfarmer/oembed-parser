@@ -1,7 +1,6 @@
 // utils -> findProvider
 
-
-var providerList = require('./providers.json');
+import providerList from './providers.json';
 
 var getHostname = (url) => {
   let match = url.match(/:\/\/(www[0-9]?\.)?(.[^/:]+)/i);
@@ -38,7 +37,7 @@ var providers = providerList.map((item) => {
   return item.domain !== '';
 });
 
-var findProvider = (url) => {
+export const findProvider = (url) => {
   let candidates = providers.filter((provider) => {
     let {
       schemes,
@@ -55,5 +54,3 @@ var findProvider = (url) => {
 
   return candidates.length > 0 ? candidates[0] : null;
 };
-
-module.exports = findProvider;
