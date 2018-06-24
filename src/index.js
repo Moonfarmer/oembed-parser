@@ -3,9 +3,10 @@
  * @ndaidong
 **/
 
-global.Promise = require('promise-wtf');
+import * as main from './main';
+import packageJSON from '../package';
 
-var main = require('./src/main');
-main.version = require('./package').version;
+main.version = packageJSON.version;
+console.log('main', main);
 
-module.exports = main;
+export default main;
