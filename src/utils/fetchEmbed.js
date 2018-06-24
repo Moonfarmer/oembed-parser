@@ -1,5 +1,7 @@
 // utils -> fetchEmbed
 
+import fetch from 'node-fetch';
+
 export const fetchEmbed = (url, provider, proxy) => {
   return new Promise((resolve, reject) => {
     let {
@@ -10,11 +12,13 @@ export const fetchEmbed = (url, provider, proxy) => {
 
     // Construct Oembed request url.  Accomodate for the 'oembed.json' and 'format=json' formats.
     let baseLink = resourceUrl.match(`{format}`)
-      ? encodeURIComponent(`${resourceUrl.replace(`{format}`, `json`)}?url=${encodeURIComponent(url)}`)
-      : encodeURIComponent(`${resourceUrl}?format=json&url=${encodeURIComponent(url)}`);
+      ? `${resourceUrl.replace(`{format}`, `json`)}?url=${encodeURIComponent(url)}`
+      : `${resourceUrl}?format=json&url=${encodeURIComponent(url)}`;
 
+    // URL encode the entire link if we are passing it to a proxy server.
+    // It will be up to the proxy to decode it and make the api call.
     let link = proxy
-      ? `${proxy}${baseLink}`
+      ? `${proxy}${encodeURIComponent(baseLink)}`
       : baseLink;
 
     return fetch(link).then((res) => {
