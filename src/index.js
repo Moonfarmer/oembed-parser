@@ -3,10 +3,10 @@
  * @ndaidong
 **/
 
+import 'babel-polyfill';
 import * as main from './main';
-import packageJSON from '../package';
+import packageJSON from '../package.json';
 
 main.version = packageJSON.version;
-console.log('main', main);
 
 export default main;
