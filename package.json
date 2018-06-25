@@ -23,7 +23,7 @@
     "test": "npm run tape",
     "posttest": "CODECOV_TOKEN=8218dc4b-2299-4592-8510-f48d25d92b06 npm run report",
     "reset": "node reset",
-    "build": "babel src -d dist"
+    "build": "babel src -d tmp && rollup ./tmp/index.js --format iife --name 'oembedParser' --file ./dist/index.js && cp ./src/utils/providers.json ./dist"
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0"
@@ -31,6 +31,7 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
+    "babel-preset-minify": "^0.4.3",
     "bellajs": "7.x.x",
     "codecov": "2.x.x",
     "eslint": "4.x.x",
