@@ -1,7 +1,5 @@
 // utils -> fetchEmbed
 
-import fetch from 'node-fetch';
-
 export const fetchEmbed = (url, provider, proxy) => {
   return new Promise((resolve, reject) => {
     let {
