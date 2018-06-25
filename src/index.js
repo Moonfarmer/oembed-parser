@@ -4,9 +4,6 @@
 **/
 
 import 'babel-polyfill';
-import * as main from './main';
-import packageJSON from '../package.json';
+import { extract, hasProvider } from './main';
 
-main.version = packageJSON.version;
-
-export default main;
+export { extract, hasProvider };
