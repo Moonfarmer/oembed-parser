@@ -1448,7 +1448,8 @@
         "endpoints": [
             {
                 "schemes": [
-                    "http:\/\/soundcloud.com\/*"
+                    "http:\/\/soundcloud.com\/*",
+                    "https:\/\/soundcloud.com\/*"
                 ],
                 "url": "https:\/\/soundcloud.com\/oembed"
             }
